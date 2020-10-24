@@ -5,6 +5,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const categoryRouter = require('./category/category-router')
+const sightingsRouter = require('./sightings/sightings-router')
 
 const app = express()
 
@@ -16,7 +17,7 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 app.use('/api/category', categoryRouter)
-
+app.use('/api/sightings',sightingsRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello, world!')
