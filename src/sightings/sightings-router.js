@@ -88,7 +88,7 @@ sightingsRouter
     if (numberOfValues === 0) {
         return res.status(400).json({
         error: {
-        message: `Request body must contain either 'location_name','date_viewed', 'category_id', 'content'`}
+        message: `Request body must contain either 'location_name', 'date_viewed', 'category_id', or 'content'`}
       })
     }
 
