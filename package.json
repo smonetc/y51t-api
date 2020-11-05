@@ -8,12 +8,17 @@
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "heroku run npm run migrate",
     "start": "node src/server.js",
-    "predeploy": "npm audit",
-    "deploy": "git push heroku master"
+    "predeploy": "npm audit && npm run migrate:production",
+    "deploy": "git push heroku HEAD:master",
+    "postdeploy":"npm run migrate:production"
   },
-  "keywords": [],
+  "keywords": [], 
   "author": "",
+  "engines": {
+    "node": "14.15.0"
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -22,15 +27,13 @@
     "helmet": "^4.1.1",
     "knex": "^0.21.6",
     "morgan": "^1.10.0",
-    "pg": "^8.4.1"
+    "pg": "^8.4.1",
+    "postgrator-cli": "^3.2.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.0",
     "nodemon": "^2.0.6",
-    "postgrator-cli": "^3.2.0",
     "supertest": "^5.0.0"
   }
 }
-
-
