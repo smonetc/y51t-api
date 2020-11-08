@@ -9,7 +9,7 @@ const serializeSightings = sighting => ({
     id: sighting.id,
     location_name: sighting.location_name,
     date_viewed: sighting.date_viewed,
-    category_id: sighting.category_id,
+    category: sighting.category,
     content: sighting.content,
     username: sighting.username
 })
@@ -19,15 +19,15 @@ sightingsRouter
 .get((req,res,next) => {
     SightingsService.getAllSightings(req.app.get('db'))
     .then(sighting => {
-        res.json(sighting.map(serializeSightings))
+        res.json(sighting.rows.map(serializeSightings))
     })
     .catch(next)
 })
 .post(jsonParser, (req, res, next) => {
-    const {location_name,date_viewed, category_id, content,username} = req.body
-    const newSighting = {location_name,date_viewed,category_id,content}
+    const {location_name,date_viewed, category, content,username} = req.body
+    const newSightings = {location_name,date_viewed,category,content}
 
-    for (const [key, value] of Object.entries(newSighting)) {
+    for (const [key, value] of Object.entries(newSightings)) {
         if (value == null) {
             return res.status(400).json ({
                 error: {message: `Missing '${key}' in request body`}
@@ -35,10 +35,10 @@ sightingsRouter
         }
     }
 
-    newSighting.username = username
+    newSightings.username = username
     SightingsService.insertSighting(
         req.app.get('db'),
-        newSighting
+        newSightings
     )
     .then( sighting => {
         res
@@ -73,7 +73,7 @@ sightingsRouter
             id: res.sighting.id,
             location_name: res.sighting.location_name,
             date_viewed: res.sighting.date_viewed,
-            category_id: res.sighting.category_id,
+            category: res.sighting.category, //category_id
             content: res. sighting.content,
             username: res.sighting.username
         }
@@ -88,7 +88,7 @@ sightingsRouter
     if (numberOfValues === 0) {
         return res.status(400).json({
         error: {
-        message: `Request body must contain either 'location_name', 'date_viewed', 'category_id', or 'content'`}
+        message: `Request body must contain either 'location_name', 'date_viewed', 'category', or 'content'`}
       })
     }
 
