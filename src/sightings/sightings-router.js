@@ -24,8 +24,8 @@ sightingsRouter
     .catch(next)
 })
 .post(jsonParser, (req, res, next) => {
-    const {location_name,date_viewed, category, content,username} = req.body
-    const newSightings = {location_name,date_viewed,category,content}
+    const {location_name,date_viewed, category_id, content,username} = req.body
+    const newSightings = {location_name,date_viewed,category_id,content}
 
     for (const [key, value] of Object.entries(newSightings)) {
         if (value == null) {
