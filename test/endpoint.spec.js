@@ -1,7 +1,7 @@
 const knex = require('knex')
 const app = require('../src/app')
 const { makeSightingsArray } = require('./sightings.fixture')
-const {makeCategoryArray} = require('./category.fixtures')
+// const {makeCategoryArray} = require('./category.fixtures')
 
 describe('Sightings Endpoints', function() {
     let db
@@ -9,7 +9,7 @@ describe('Sightings Endpoints', function() {
     before('make knex instance', () => {
       db = knex({
         client: 'pg',
-        connection: process.env.TEST_DB_URL,
+        connection: process.env.DATABASE_URL, //process.env.TEST_DB_URL
       })
       app.set('db', db)
     })
@@ -50,7 +50,7 @@ describe('Sightings Endpoints', function() {
             const newSighting = {
                 "location_name":"test",
                 "date_viewed":"2018-12-21T00:00:00.000Z",
-                "category_id":4,
+                "category_id":2,
                 "content":"test test",
                 "username":"test"
             }
@@ -79,7 +79,7 @@ describe('Sightings Endpoints', function() {
         const newSighting = {
         "location_name":"test",
         "date_viewed":"2018-12-21T00:00:00.000Z",
-        "category_id":4,
+        "category_id":2,
         "content":"test test",
         }
 
@@ -188,4 +188,13 @@ describe('Sightings Endpoints', function() {
          })
       })  
    })
+   describe(`GET /api/category`, () => {
+        context(`Given there are categories `, () => {
+        it(`responds with 200`, () => {
+            return supertest(app)
+            .get('/api/category')
+            .expect(200)
+            })
+        })
+    })
 })   
