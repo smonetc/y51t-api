@@ -6,3 +6,5 @@ There are two databases and two endpoints for both the categories and for the si
 
 [Live Version](https://y51t.smonetc.vercel.app/)
 [Client Repo](https://github.com/smonetc/y51t-client)
+
+Tech used: Express, Node, Postgresql,knex,Chai
