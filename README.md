@@ -33,7 +33,7 @@ None
 
 * Error Response:
    * Code: 404 NOT FOUND  
-      * Content; "error": {"message": "Category not found"}
+      * Content: "error": {"message": "Category not found"}
 
 ### Get Specific Category
 
@@ -85,7 +85,7 @@ None
       * Content: {"id":2,"location_name":"Nevada","date_viewed":"2020-10-15T00:00:00.000Z","category":"UFO","content":"UFO hovers over Area 51 in Hiko, NV","username":"Brandon"}
 * Error Response:
    * Code: 404 Not Found
-      * Content: eerror: {message: `Sighting not found`}
+      * Content: error: {message: `Sighting not found`}
 
 ### Post new sighting
 
@@ -110,7 +110,7 @@ None
       * Content: {"id":2,"location_name":"Nevada","date_viewed":"2020-10-15T00:00:00.000Z","category":"UFO","content":"UFO hovers over Area 51 in Hiko, NV","username":"Brandon"}
 * Error Response:
    * Code: 404 Not Found
-      * Content: eerror: {message: `Sighting not found`}
+      * Content: error: {message: `Sighting not found`}
 
 
 
